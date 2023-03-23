@@ -1,8 +1,2 @@
-/Database.class
-/DatabaseInterface.class
-/Equipment.class
-/EquipmentTable.class
-/Member.class
-/MemberTable.class
-/Warehouse.class
-/WarehouseTable.class
+/MemberMenu.class
+/InventoryMenu.class
