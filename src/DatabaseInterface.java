@@ -51,7 +51,13 @@ public final class DatabaseInterface {
             InventoryRepairRecordMenu irrm = new InventoryRepairRecordMenu(
                     conn);
             ReturnMenu returnMenu = new ReturnMenu(conn);
-            returnMenu.run();
+            //TODO test these and figure out why its locked, is it
+            DeliveryMenu deliveryMenu = new DeliveryMenu(conn);
+            RentalMenu rentalMenu = new RentalMenu(conn);
+            ServiceRequestReviewMenu srrm = new ServiceRequestReviewMenu(conn);
+            EquipmentReviewMenu erm = new EquipmentReviewMenu(conn);
+            deliveryMenu.run();
+            conn.close();
         } catch (SQLException e) {
             System.out.println("Error connectiong to SQLite DB");
             e.printStackTrace();

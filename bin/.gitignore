@@ -7,3 +7,9 @@
 /TableMenu.class
 /InventoryRepairRecordMenu.class
 /ReturnMenu.class
+/Delivery.class
+/DeliveryMenu.class
+/RentalMenu.class
+/ServiceRequestMenu.class
+/ServiceRequestReviewMenu.class
+/EquipmentReviewMenu.class
