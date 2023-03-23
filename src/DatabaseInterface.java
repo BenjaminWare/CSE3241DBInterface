@@ -44,7 +44,14 @@ public final class DatabaseInterface {
             WarehouseMenu wm = new WarehouseMenu(conn);
             MemberMenu mm = new MemberMenu(conn);
             InventoryMenu im = new InventoryMenu(conn);
-            im.run();
+            EquipmentMenu em = new EquipmentMenu(conn);
+            DroneMenu dm = new DroneMenu(conn);
+            EquipmentOrderMenu eom = new EquipmentOrderMenu(conn);
+            InventoryRepairShopMenu irsm = new InventoryRepairShopMenu(conn);
+            InventoryRepairRecordMenu irrm = new InventoryRepairRecordMenu(
+                    conn);
+            ReturnMenu returnMenu = new ReturnMenu(conn);
+            returnMenu.run();
         } catch (SQLException e) {
             System.out.println("Error connectiong to SQLite DB");
             e.printStackTrace();
