@@ -21,6 +21,121 @@ public final class DatabaseInterface {
     //Where the DB is on my development machine
     static String DB_URL = "C:\\Program Files\\SQLiteStudio\\testDB.db";
 
+    public static void tableMenu(Connection conn) {
+        Scanner in = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Choose an option by number (q to quit):");
+            System.out.println("1. Warehouse Table");
+            System.out.println("2. Member Table");
+            System.out.println("3. Inventory Table");
+            System.out.println("4. Equipment Table");
+            System.out.println("5. Drone Table");
+            System.out.println("6. Equipment Order Table");
+            System.out.println("7. Inventory Repair Shop Table");
+            System.out.println("8. Inventory Repair Record Table");
+            System.out.println("9. Return Table");
+            System.out.println("10. Delivery Table");
+            System.out.println("11 Rental Table");
+            System.out.println("12. Service Request Review Table");
+            System.out.println("13. Equipment Review Table");
+
+            String option = in.nextLine();
+            if (option.equals("q")) {
+                in.close();
+                return;
+            }
+            switch (option) {
+                case "1":
+                    WarehouseMenu wm = new WarehouseMenu(conn);
+                    wm.run();
+                    break;
+                case "2":
+                    MemberMenu mm = new MemberMenu(conn);
+                    mm.run();
+                    break;
+                case "3":
+                    InventoryMenu im = new InventoryMenu(conn);
+                    im.run();
+                    break;
+                case "4":
+                    EquipmentMenu em = new EquipmentMenu(conn);
+                    em.run();
+                    break;
+                case "5":
+                    DroneMenu dm = new DroneMenu(conn);
+                    dm.run();
+                    break;
+                case "6":
+                    EquipmentOrderMenu eom = new EquipmentOrderMenu(conn);
+                    eom.run();
+                    break;
+                case "7":
+                    InventoryRepairShopMenu irsm = new InventoryRepairShopMenu(
+                            conn);
+                    irsm.run();
+                    break;
+                case "8":
+                    InventoryRepairRecordMenu irrm = new InventoryRepairRecordMenu(
+                            conn);
+                    irrm.run();
+                    break;
+                case "9":
+                    ReturnMenu returnMenu = new ReturnMenu(conn);
+                    returnMenu.run();
+                    break;
+                case "10":
+                    DeliveryMenu deliveryMenu = new DeliveryMenu(conn);
+                    deliveryMenu.run();
+                    break;
+                case "11":
+                    RentalMenu rentalMenu = new RentalMenu(conn);
+                    rentalMenu.run();
+                    break;
+                case "12":
+                    ServiceRequestReviewMenu srrm = new ServiceRequestReviewMenu(
+                            conn);
+                    srrm.run();
+                    break;
+                case "13":
+                    EquipmentReviewMenu erm = new EquipmentReviewMenu(conn);
+                    erm.run();
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+
+        }
+    }
+
+    public static void mainMenu(Connection conn) {
+        Scanner in = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Main Menu");
+            System.out.println("Choose an option by number (q to quit):");
+            System.out.println("1. Create/Read/Update/Delete from Tables.");
+            System.out.println("2. Useful reports.");
+
+            String option = in.nextLine();
+            if (option.equals("q")) {
+                in.close();
+                return;
+            }
+            switch (option) {
+                case "1":
+                    tableMenu(conn);
+                    break;
+                case "2":
+                    //nothing yet
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+
+        }
+    }
+
     /**
      * Main method runs the menu until the user is done
      *
@@ -40,23 +155,7 @@ public final class DatabaseInterface {
             //Connects to DB
             Connection conn = DriverManager.getConnection(JDBC_DRIVER + DB_URL);
 
-            //Creates menus
-            WarehouseMenu wm = new WarehouseMenu(conn);
-            MemberMenu mm = new MemberMenu(conn);
-            InventoryMenu im = new InventoryMenu(conn);
-            EquipmentMenu em = new EquipmentMenu(conn);
-            DroneMenu dm = new DroneMenu(conn);
-            EquipmentOrderMenu eom = new EquipmentOrderMenu(conn);
-            InventoryRepairShopMenu irsm = new InventoryRepairShopMenu(conn);
-            InventoryRepairRecordMenu irrm = new InventoryRepairRecordMenu(
-                    conn);
-            ReturnMenu returnMenu = new ReturnMenu(conn);
-            //TODO test these and figure out why its locked, is it
-            DeliveryMenu deliveryMenu = new DeliveryMenu(conn);
-            RentalMenu rentalMenu = new RentalMenu(conn);
-            ServiceRequestReviewMenu srrm = new ServiceRequestReviewMenu(conn);
-            EquipmentReviewMenu erm = new EquipmentReviewMenu(conn);
-            deliveryMenu.run();
+            mainMenu(conn);
             conn.close();
         } catch (SQLException e) {
             System.out.println("Error connectiong to SQLite DB");

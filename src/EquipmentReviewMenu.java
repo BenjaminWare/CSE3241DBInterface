@@ -121,7 +121,7 @@ public class EquipmentReviewMenu {
             String primaryKeyValue = scanner.nextLine();
 
             // Check if the entry exists
-            String selectQuery = "SELECT * FROM equipment WHERE serial_number = ?";
+            String selectQuery = "SELECT * FROM equipment_review WHERE serial_number = ?";
             PreparedStatement selectStmt = this.connection
                     .prepareStatement(selectQuery);
             selectStmt.setString(1, primaryKeyValue);
