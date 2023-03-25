@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
@@ -67,22 +68,24 @@ public class WarehouseMenu {
     private void readEntries() {
         try {
             Statement statement = this.connection.createStatement();
-            ResultSet resultSet = statement
-                    .executeQuery("SELECT * FROM warehouse");
+            ResultSet result = statement
+                    .executeQuery("SELECT * FROM equipment_order");
 
-            while (resultSet.next()) {
-                String userId = resultSet.getString("user_id");
-                String firstName = resultSet.getString("first_name");
-                String lastName = resultSet.getString("last_name");
-                String address = resultSet.getString("address");
-                String phone = resultSet.getString("phone");
-                String email = resultSet.getString("email");
-                String startDate = resultSet.getString("start_date");
-                int statusId = resultSet.getInt("status_id");
+            ResultSetMetaData metaData = result.getMetaData();
+            int columnCount = metaData.getColumnCount();
 
-                System.out.printf("%s | %s | %s | %s | %s | %s | %s | %d\n",
-                        userId, firstName, lastName, address, phone, email,
-                        startDate, statusId);
+            // Print header row
+            for (int i = 1; i <= columnCount; i++) {
+                System.out.print(metaData.getColumnName(i) + "\t");
+            }
+            System.out.println();
+
+            // Print data rows
+            while (result.next()) {
+                for (int i = 1; i <= columnCount; i++) {
+                    System.out.print(result.getString(i) + "\t");
+                }
+                System.out.println();
             }
             statement.close();
         } catch (SQLException e) {

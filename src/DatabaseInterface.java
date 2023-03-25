@@ -21,9 +21,7 @@ public final class DatabaseInterface {
     //Where the DB is on my development machine
     static String DB_URL = "C:\\Program Files\\SQLiteStudio\\testDB.db";
 
-    public static void tableMenu(Connection conn) {
-        Scanner in = new Scanner(System.in);
-
+    public static void tableMenu(Connection conn, Scanner in) {
         while (true) {
             System.out.println("Choose an option by number (q to quit):");
             System.out.println("1. Warehouse Table");
@@ -42,7 +40,6 @@ public final class DatabaseInterface {
 
             String option = in.nextLine();
             if (option.equals("q")) {
-                in.close();
                 return;
             }
             switch (option) {
@@ -124,7 +121,7 @@ public final class DatabaseInterface {
             }
             switch (option) {
                 case "1":
-                    tableMenu(conn);
+                    tableMenu(conn, in);
                     break;
                 case "2":
                     //nothing yet
